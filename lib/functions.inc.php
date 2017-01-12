@@ -429,7 +429,7 @@ function send_mail($mail, $mail_from, $subject, $body, $data, $smtp_params) {
     } else {
         $result = true;
     }
-
+    #error_log("Send $result mail\n\n", 3, "/var/log/httpd/selfldap-access_log");
     return $result;
 
 }

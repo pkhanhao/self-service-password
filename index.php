@@ -34,7 +34,16 @@ set_include_path(get_include_path() . PATH_SEPARATOR . $lib_path);
 # Language
 #==============================================================================
 # Available languages
-$languages = array('en', 'de', 'es', 'fr', 'nl', 'pt-BR', 'ca', 'pl', 'ru', 'it', 'sk');
+########$languages = array('en', 'de', 'es', 'fr', 'nl', 'pt-BR', 'ca', 'pl', 'ru', 'it', 'sk');
+$languages = array();
+if ($handle = opendir('lang')) {
+    while (false !== ($entry = readdir($handle))) {
+        if ($entry != "." && $entry != "..") {
+             array_push($languages, str_replace(".inc.php", "", $entry));
+        }
+    }
+    closedir($handle);
+}
 $lang = detectLanguage($lang, $languages);
 require_once("lang/$lang.inc.php");
 

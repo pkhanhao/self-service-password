@@ -30,6 +30,7 @@ $login = "";
 $token = "";
 $tokenid = "";
 $newpassword = "";
+$oldpassword = "";
 $confirmpassword = "";
 $ldap = "";
 $userdn = "";

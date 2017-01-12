@@ -23,10 +23,10 @@
 # Configuration
 #==============================================================================
 # LDAP
-$ldap_url = "ldap://localhost";
-$ldap_binddn = "cn=manager,dc=example,dc=com";
-$ldap_bindpw = "secret";
-$ldap_base = "dc=example,dc=com";
+$ldap_url = "ldap://x.x.x.x:389";
+$ldap_binddn = "cn=admin,dc=example,dc=com";
+$ldap_bindpw = "passwd";
+$ldap_base = "ou=People,dc=example,dc=com";
 $ldap_login_attribute = "uid";
 $ldap_fullname_attribute = "cn";
 $ldap_filter = "(&(objectClass=person)($ldap_login_attribute={login}))";
@@ -57,12 +57,12 @@ $shadow_options['update_shadowLastChange'] = false;
 # CRYPT
 # clear (the default)
 # This option is not used with ad_mode = true
-$hash = "clear";
+$hash = "SSHA";
 
 # Local password policy
 # This is applied before directory password policy
 # Minimal length
-$pwd_min_length = 0;
+$pwd_min_length = 6;
 # Maximal length
 $pwd_max_length = 0;
 # Minimal lower characters
@@ -76,16 +76,16 @@ $pwd_min_special = 0;
 # Definition of special characters
 $pwd_special_chars = "^a-zA-Z0-9";
 # Forbidden characters
-#$pwd_forbidden_chars = "@%";
+$pwd_forbidden_chars = "*()&|";
 # Don't reuse the same password as currently
 $pwd_no_reuse = true;
 # Complexity: number of different class of character required
-$pwd_complexity = 0;
+$pwd_complexity = 2;
 # Show policy constraints message:
 # always
 # never
 # onerror
-$pwd_show_policy = "never";
+$pwd_show_policy = "onerror";
 # Position of password policy constraints message:
 # above - the form
 # below - the form
@@ -101,7 +101,7 @@ $who_change_password = "user";
 # Use questions/answers?
 # true (default)
 # false
-$use_questions = true;
+$use_questions = false;
 
 # Answer attribute should be hidden to users!
 $answer_objectClass = "extensibleObject";
@@ -120,31 +120,32 @@ $use_tokens = true;
 # false
 $crypt_tokens = true;
 # Token lifetime in seconds
-$token_lifetime = "3600";
+#$token_lifetime = "3600";
+$token_lifetime = "1800";
 
 ## Mail
 # Mail settings
 $smtp_params = array(
-    "host" => "smtp.example.com",
+    "host" => "xxxxxxxx",
     "port" => "25",
     # Whether or not to use SMTP authentication. Default is FALSE.
-    # "auth" => true,
+    "auth" => true,
     # If the auth value is true, username and password is required.
-    # "username" => "username",
-    # "password" => "password",
+    "username" => "pkhanhao@xxx.com",
+    "password" => "passwd",
     # The SMTP connection timeout. Default is NULL (no timeout).
     # "timeout" => NULL,
 );
 # LDAP mail attribute
 $mail_attribute = "mail";
 # Who the email should come from
-$mail_from = "admin@example.com";
+$mail_from = "pkhanhao@xxx.com";
 # Notify users anytime their password is changed
-$notify_on_change = false;
+$notify_on_change = true;
 
 ## SMS
 # Use sms
-$use_sms = true;
+$use_sms = false;
 # GSM number attribute
 $sms_attribute = "mobile";
 # Send SMS mail to address
@@ -164,17 +165,17 @@ $show_help = true;
 $lang ="en";
 
 # Logo
-$logo = "style/ltb-logo.png";
+$logo = "style/Passwd.png";
 
 # Debug mode
-$debug = false;
+$debug = true;
 
 # Encryption, decryption keyphrase
-$keyphrase = "secret";
+$keyphrase = "pkhanhaoldap";
 
 # Where to log password resets - Make sure apache has write permission
 # By default, they are logged in Apache log
-#$reset_request_log = "/var/log/self-service-password";
+$reset_request_log = "/var/log/httpd/selfldap-access_log";
 
 # Invalid characters in login
 # Set at least "*()&|" to prevent LDAP injection
@@ -201,7 +202,7 @@ $default_action = "change";
 
 ## Extra messages
 # They can also be defined in lang/ files
-#$messages['passwordchangedextramessage'] = NULL;
-#$messages['changehelpextramessage'] = NULL;
+$messages['passwordchangedextramessage'] = "您现在可以使用新密码了!";
+$messages['changehelpextramessage'] = "如需帮助请联系pkhanhao@xxx.com.";
 
 ?>
